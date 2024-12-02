@@ -1,12 +1,13 @@
 import type { ComponentProps } from "react";
 
+import { cn } from "@/lib";
 import { Root } from "@radix-ui/react-tabs";
 
 export type TabsProps = ComponentProps<typeof Root>;
 
-const Tabs = ({ ...props }: TabsProps) => {
+const Tabs = ({ className, ...props }: TabsProps) => {
   return (
-    <Root {...props} />
+    <Root {...props} className={cn("grow flex flex-col", className)} />
   );
 };
 

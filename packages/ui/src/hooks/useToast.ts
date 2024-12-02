@@ -1,10 +1,7 @@
+import type { ToastAction, ToastProps } from "@/components";
+
+import { TOAST_LIMIT, TOAST_REMOVE_DELAY } from "@/constants";
 import { type ReactElement, type ReactNode, useCallback, useEffect, useState } from "react";
-
-import type { ToastProps } from "./Toast";
-import type { default as ToastAction } from "./ToastAction";
-
-const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1_000_000;
 
 type ToasterToast = {
   action?: ReactElement<typeof ToastAction>;
@@ -13,19 +10,9 @@ type ToasterToast = {
   title?: ReactNode;
 } & ToastProps;
 
-enum ActionType {
-  AddToast = "ADD_TOAST",
-  DismissToast = "DISMISS_TOAST",
-  RemoveToast = "REMOVE_TOAST",
-  UpdateToast = "UPDATE_TOAST",
+type State = {
+  toasts: ToasterToast[];
 };
-
-let count = 0;
-
-function genId() {
-  count = (count + 1) % Number.MAX_SAFE_INTEGER;
-  return count.toString();
-}
 
 type Action =
   | {
@@ -45,9 +32,19 @@ type Action =
     type: ActionType.RemoveToast;
   };
 
-interface State {
-  toasts: ToasterToast[];
-}
+enum ActionType {
+  AddToast = "ADD_TOAST",
+  DismissToast = "DISMISS_TOAST",
+  RemoveToast = "REMOVE_TOAST",
+  UpdateToast = "UPDATE_TOAST",
+};
+
+let count = 0;
+
+const genId = () => {
+  count = (count + 1) % Number.MAX_SAFE_INTEGER;
+  return count.toString();
+};
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 

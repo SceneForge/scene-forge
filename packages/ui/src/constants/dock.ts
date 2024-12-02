@@ -1,0 +1,2 @@
+export const DOCK_DEFAULT_MAGNIFICATION = 60;
+export const DOCK_DEFAULT_DISTANCE = 140;

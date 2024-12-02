@@ -1,8 +1,7 @@
 import type { ComponentProps } from "react";
 
+import { useCarousel } from "@/hooks";
 import { cn } from "@/lib";
-
-import { useCarousel } from "./useCarousel";
 
 export type CarouselItemProps = ComponentProps<"div">;
 

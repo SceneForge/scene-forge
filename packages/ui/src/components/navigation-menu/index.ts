@@ -20,7 +20,8 @@ export type { NavigationMenuListProps } from "./NavigationMenuList";
 
 export const NavigationMenuTrigger = lazy(() => import("./NavigationMenuTrigger"));
 export type { NavigationMenuTriggerProps } from "./NavigationMenuTrigger";
-export { navigationMenuTriggerStyle } from "./NavigationMenuTrigger";
+
+export { navigationMenuTriggerStyle } from "./navigationMenuTriggerStyle";
 
 export const NavigationMenuViewport = lazy(() => import("./NavigationMenuViewport"));
 export type { NavigationMenuViewportProps } from "./NavigationMenuViewport";

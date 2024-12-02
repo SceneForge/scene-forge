@@ -7,12 +7,6 @@ export const CarouselContent = lazy(() => import("./CarouselContent"));
 export type { CarouselContentProps } from "./CarouselContent";
 
 export const CarouselItem = lazy(() => import("./CarouselItem"));
-export type {
-  CarouselApi,
-  CarouselContextProps,
-  CarouselOptions,
-  CarouselPlugin,
-} from "./CarouselContext";
 export type { CarouselItemProps } from "./CarouselItem";
 
 export const CarouselNext = lazy(() => import("./CarouselNext"));

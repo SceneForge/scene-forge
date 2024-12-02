@@ -1,15 +1,13 @@
-import type { toggleVariants } from "@/components/toggle";
-import type { VariantProps } from "class-variance-authority";
+import type { ToggleVariantsProps } from "@/components";
 import type { ComponentProps } from "react";
 
 import { cn } from "@/lib";
+import { ToggleGroupProvider } from "@/providers";
 import { Root } from "@radix-ui/react-toggle-group";
-
-import { ToggleGroupContext } from "./ToggleGroupContext";
 
 export type ToggleGroupProps =
   & ComponentProps<typeof Root>
-  & VariantProps<typeof toggleVariants>;
+  & ToggleVariantsProps;
 
 const ToggleGroup = ({
   children,
@@ -25,9 +23,9 @@ const ToggleGroup = ({
       className={cn("flex items-center justify-center gap-1", className)}
       ref={ref}
     >
-      <ToggleGroupContext.Provider value={{ size, variant }}>
+      <ToggleGroupProvider size={size} variant={variant}>
         {children}
-      </ToggleGroupContext.Provider>
+      </ToggleGroupProvider>
     </Root>
   );
 };

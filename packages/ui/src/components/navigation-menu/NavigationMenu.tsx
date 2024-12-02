@@ -1,5 +1,5 @@
 import { cn } from "@/lib";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import { Root } from "@radix-ui/react-navigation-menu";
 import { lazy } from "react";
 
 const NavigationMenuViewport = lazy(() => import("./NavigationMenuViewport"));
@@ -7,7 +7,7 @@ const NavigationMenuViewport = lazy(() => import("./NavigationMenuViewport"));
 import type { ComponentProps } from "react";
 
 export type NavigationMenuProps = ComponentProps<
-  typeof NavigationMenuPrimitive.Root
+  typeof Root
 >;
 
 const NavigationMenu = ({
@@ -17,7 +17,7 @@ const NavigationMenu = ({
   ...props
 }: NavigationMenuProps) => {
   return (
-    <NavigationMenuPrimitive.Root
+    <Root
       {...props}
       className={cn(
         "relative z-10 flex max-w-max flex-1 items-center justify-center",
@@ -27,7 +27,7 @@ const NavigationMenu = ({
     >
       {children}
       <NavigationMenuViewport />
-    </NavigationMenuPrimitive.Root>
+    </Root>
   );
 };
 

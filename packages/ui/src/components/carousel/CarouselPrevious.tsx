@@ -1,10 +1,9 @@
 import type { ComponentProps } from "react";
 
+import { Button } from "@/components";
+import { useCarousel } from "@/hooks";
 import { cn } from "@/lib";
 import { ArrowLeft } from "lucide-react";
-
-import { Button } from "../button";
-import { useCarousel } from "./useCarousel";
 
 export type CarouselPreviousProps = ComponentProps<typeof Button>;
 

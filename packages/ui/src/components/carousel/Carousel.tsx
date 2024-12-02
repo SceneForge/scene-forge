@@ -1,10 +1,9 @@
+import { useCarousel } from "@/hooks";
 import { cn } from "@/lib";
-import useEmblaCarousel from "embla-carousel-react";
-import { type ComponentProps, type KeyboardEvent, useCallback, useEffect, useState } from "react";
+import { CarouselProvider } from "@/providers";
+import { type ComponentProps } from "react";
 
-import { type CarouselApi, CarouselContext, type CarouselCoreProps } from "./CarouselContext";
-
-export type CarouselProps = CarouselCoreProps & ComponentProps<"div">;
+export type CarouselProps = ComponentProps<"div"> & ComponentProps<typeof CarouselProvider>;
 
 const Carousel = ({
   children,
@@ -16,82 +15,14 @@ const Carousel = ({
   setApi,
   ...props
 }: CarouselProps) => {
-  const [carouselRef, api] = useEmblaCarousel(
-    {
-      ...opts,
-      axis: orientation === "horizontal" ? "x" : "y",
-    },
-    plugins
-  );
-  const [canScrollPrevious, setCanScrollPrevious] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  const onSelect = useCallback((api: CarouselApi) => {
-    if (!api) {
-      return;
-    }
-
-    setCanScrollPrevious(api.canScrollPrev());
-    setCanScrollNext(api.canScrollNext());
-  }, []);
-
-  const scrollPrevious = useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
-
-  const scrollNext = useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        scrollPrevious();
-      }
-      else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        scrollNext();
-      }
-    },
-    [scrollPrevious, scrollNext]
-  );
-
-  useEffect(() => {
-    if (!api || !setApi) {
-      return;
-    }
-
-    setApi(api);
-  }, [api, setApi]);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    onSelect(api);
-    api.on("reInit", onSelect);
-    api.on("select", onSelect);
-
-    return () => {
-      api?.off("select", onSelect);
-    };
-  }, [api, onSelect]);
+  const { handleKeyDown } = useCarousel();
 
   return (
-    <CarouselContext.Provider
-      value={{
-        api: api,
-        canScrollNext,
-        canScrollPrev: canScrollPrevious,
-        carouselRef,
-        opts,
-        orientation:
-          orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
-        scrollNext,
-        scrollPrev: scrollPrevious,
-      }}
+    <CarouselProvider
+      opts={opts}
+      orientation={orientation}
+      plugins={plugins}
+      setApi={setApi}
     >
       <div
         {...props}
@@ -103,7 +34,7 @@ const Carousel = ({
       >
         {children}
       </div>
-    </CarouselContext.Provider>
+    </CarouselProvider>
   );
 };
 

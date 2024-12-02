@@ -1,9 +1,8 @@
 import type { ComponentProps } from "react";
 
+import { buttonVariants } from "@/components";
 import { cn } from "@/lib";
 import { Cancel } from "@radix-ui/react-alert-dialog";
-
-import { buttonVariants } from "../button";
 
 export type AlertDialogCancelProps = ComponentProps<typeof Cancel>;
 

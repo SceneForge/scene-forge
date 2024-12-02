@@ -11,3 +11,6 @@ export type { TabsListProps } from "./TabsList";
 
 export const TabsTrigger = lazy(() => import("./TabsTrigger"));
 export type { TabsTriggerProps } from "./TabsTrigger";
+
+export const TabsTriggerClose = lazy(() => import("./TabsTriggerClose"));
+export type { TabsTriggerCloseProps } from "./TabsTriggerClose";

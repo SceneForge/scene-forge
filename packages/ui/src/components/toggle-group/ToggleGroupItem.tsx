@@ -1,15 +1,12 @@
-import type { VariantProps } from "class-variance-authority";
-
+import { toggleVariants, type ToggleVariantsProps } from "@/components";
+import { useToggleGroup } from "@/hooks";
 import { cn } from "@/lib";
 import { Item } from "@radix-ui/react-toggle-group";
-import { type ComponentProps, useContext } from "react";
-
-import { toggleVariants } from "../toggle/Toggle";
-import { ToggleGroupContext } from "./ToggleGroupContext";
+import { type ComponentProps } from "react";
 
 export type ToggleGroupItemProps =
   & ComponentProps<typeof Item>
-  & VariantProps<typeof toggleVariants>;
+  & ToggleVariantsProps;
 
 const ToggleGroupItem = ({
   children,
@@ -22,7 +19,7 @@ const ToggleGroupItem = ({
   const {
     size: contextSize,
     variant: contextVariant,
-  } = useContext(ToggleGroupContext);
+  } = useToggleGroup();
 
   return (
     <Item

@@ -4,11 +4,11 @@ import {
   Toast,
   ToastClose,
   ToastDescription,
-  ToastProvider,
   ToastTitle,
   ToastViewport,
-  useToast,
-} from "@/components/toast";
+} from "@/components";
+import { useToast } from "@/hooks";
+import { ToastProvider } from "@/providers";
 
 export type ToasterProps = ComponentProps<typeof ToastProvider>;
 

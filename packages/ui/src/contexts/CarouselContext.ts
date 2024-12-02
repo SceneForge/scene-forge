@@ -10,20 +10,20 @@ export type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 export type CarouselOptions = UseCarouselParameters[0];
 export type CarouselPlugin = UseCarouselParameters[1];
 
-export type CarouselCoreProps = {
+export type CarouselCoreType = {
   opts?: CarouselOptions;
   orientation?: "horizontal" | "vertical";
   plugins?: CarouselPlugin;
   setApi?: (api: CarouselApi) => void;
 };
 
-export type CarouselContextProps = {
+export type CarouselContextType = {
   api: EmblaCarouselApi;
   canScrollNext: boolean;
   canScrollPrev: boolean;
   carouselRef: EmblaCarouselRef;
   scrollNext: () => void;
   scrollPrev: () => void;
-} & CarouselCoreProps;
+} & CarouselCoreType;
 
-export const CarouselContext = createContext<CarouselContextProps | null>(null);
+export const CarouselContext = createContext<CarouselContextType | null>(null);
