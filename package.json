@@ -40,6 +40,7 @@
     "@sceneforge/docs": "workspace:*",
     "eslint-plugin-react-compiler": "0.0.0-experimental-b6997ec-20240909",
     "i18next": "^23.15.1",
+    "react-hook-form": "^7.53.2",
     "terser": "^5.32.0"
   },
   "devDependencies": {

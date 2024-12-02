@@ -1,7 +1,6 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 
-import { type BeforeInstallPromptEvent } from "../providers";
-import { useAppInstallContext } from "./useAppInstallContext";
+import { AppInstallContext, type BeforeInstallPromptEvent } from "../contexts";
 
 const ANIMATION_TIMEOUT = 1000 * 60 * 5; // 1 minute
 
@@ -15,7 +14,7 @@ export const useAppInstall = () => {
     setShowInstallDialog,
     showInstall,
     showInstallDialog,
-  } = useAppInstallContext();
+  } = useContext(AppInstallContext);
 
   const beforeInstallHandler = useCallback(
     (event: Event) => {

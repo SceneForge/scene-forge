@@ -1,36 +1,19 @@
-import { DatabaseProvider } from "@sceneforge/data";
-import {
-  type TabsHandler,
-  ThemeProvider,
-  type ThemeType,
-} from "@sceneforge/ui";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
 import {
   type PropsWithChildren,
-  useRef,
   useState,
 } from "react";
 
-import { ReloadPrompt } from "../components";
+import { AppContext } from "../contexts";
 import { isOverlayVisible } from "../lib/isOverlayVisible";
-import { AppContext } from "./AppContext";
 
 export type AppProviderProps = PropsWithChildren<{
   languages?: readonly string[];
-  theme?: ThemeType;
+  theme?: string;
 }>;
-
-const queryClient = new QueryClient();
 
 const AppProvider = ({
   children,
-  theme,
 }: AppProviderProps) => {
-  const tabsHandlerRef = useRef<null | TabsHandler>(null);
-
   const name = import.meta.env.VITE_APP_NAME ?? "";
   const description = import.meta.env.VITE_APP_DESCRIPTION ?? "";
   const keywords = import.meta.env.VITE_APP_KEYWORDS ?? "";
@@ -54,18 +37,10 @@ const AppProvider = ({
         overlayVisible,
         repository,
         setOverlayVisible,
-        tabsHandlerRef,
         version,
       }}
     >
-      <ThemeProvider {...theme}>
-        <QueryClientProvider client={queryClient}>
-          <DatabaseProvider>
-            {children}
-            <ReloadPrompt />
-          </DatabaseProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
+      {children}
     </AppContext>
   );
 };

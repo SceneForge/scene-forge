@@ -1,52 +1,68 @@
+import { DatabaseProvider } from "@sceneforge/data";
 import {
-  AppLayout,
-  IconEnum,
-  Variant,
+  SidebarInset,
+  SidebarProvider,
+  SidebarWrapper,
+  ThemeProvider,
 } from "@sceneforge/ui";
-import { lazy } from "react";
-import { useTranslation } from "react-i18next";
+import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { ShortcutName, useApp, useAppContext, useShortcuts } from "../../hooks";
+import {
+  AppDataProvider,
+  AppInstallProvider,
+  AppProvider,
+  AppTabsProvider,
+  ServiceWorkerProvider,
+} from "../../providers";
+import {
+  AppSidebar,
+  AppSidebarContent,
+  AppSidebarFooter,
+  AppSidebarHeader,
+} from "../AppSidebar";
+import { AppTabs } from "../AppTabs";
 
-const Tabs = lazy(() => import("./Tabs"));
+export type AppProps = {
+  children?: never;
+  languages: string[];
+  queryClient: QueryClient;
+  theme?: string;
+};
 
-const App = () => {
-  useApp();
-  const { name } = useAppContext();
-
-  const { t } = useTranslation("tabs");
-  const { open } = useShortcuts();
-
+const App = ({
+  languages,
+  queryClient,
+  theme,
+}: AppProps) => {
   return (
-    <AppLayout
-      colorScheme="dark"
-      topbar={{
-        actionsEnd: [
-          {
-            icon: IconEnum.Home,
-            kind: "icon",
-            label: t("HomeTab.title"),
-            onClick: () => void open(ShortcutName.Home),
-          },
-          {
-            icon: IconEnum.Info,
-            kind: "icon",
-            label: t("AboutTab.title"),
-            onClick: () => void open(ShortcutName.About),
-          },
-          {
-            icon: IconEnum.Settings,
-            kind: "icon",
-            label: t("SettingsTab.title"),
-            onClick: () => void open(ShortcutName.Settings),
-          },
-        ],
-        title: name,
-        variant: Variant.Primary,
-      }}
-    >
-      <Tabs />
-    </AppLayout>
+    <AppProvider languages={languages}>
+      <DatabaseProvider>
+        <AppDataProvider>
+          <QueryClientProvider client={queryClient}>
+            <ServiceWorkerProvider>
+              <ThemeProvider theme={theme}>
+                <SidebarProvider>
+                  <SidebarWrapper>
+                    <AppInstallProvider>
+                      <AppTabsProvider>
+                        <AppSidebar>
+                          <AppSidebarHeader />
+                          <AppSidebarContent />
+                          <AppSidebarFooter />
+                        </AppSidebar>
+                        <SidebarInset>
+                          <AppTabs />
+                        </SidebarInset>
+                      </AppTabsProvider>
+                    </AppInstallProvider>
+                  </SidebarWrapper>
+                </SidebarProvider>
+              </ThemeProvider>
+            </ServiceWorkerProvider>
+          </QueryClientProvider>
+        </AppDataProvider>
+      </DatabaseProvider>
+    </AppProvider>
   );
 };
 

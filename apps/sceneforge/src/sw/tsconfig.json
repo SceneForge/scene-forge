@@ -7,6 +7,7 @@
     "lib": [
       "ESNext",
       "WebWorker",
+      "WebWorker.AsyncIterable",
       "Webworker.Iterable",
       "WebWorker.ImportScripts"
     ],

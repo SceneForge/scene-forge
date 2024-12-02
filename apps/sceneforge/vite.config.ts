@@ -117,5 +117,5 @@ export default defineConfig(async ({ command, isPreview, mode }) => {
       },
       port: DEFAULT_DEV_PORT,
     },
-  } as UserConfig;
+  } satisfies UserConfig;
 });

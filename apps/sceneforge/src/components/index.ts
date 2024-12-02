@@ -1,11 +1,17 @@
 export * from "./App";
 export type * from "./App";
 
-export * from "./HotspotPopover";
-export type * from "./HotspotPopover";
+export * from "./AppInstall";
+export type * from "./AppInstall";
 
-export * from "./HotspotsPane";
-export type * from "./HotspotsPane";
+export * from "./AppSidebar";
+export type * from "./AppSidebar";
 
-export * from "./SceneDrawer";
-export type * from "./SceneDrawer";
+export * from "./SceneMenubar";
+export type * from "./SceneMenubar";
+
+export * from "./SceneModeIcon";
+export type * from "./SceneModeIcon";
+
+export * from "./ScenePanel";
+export type * from "./ScenePanel";
