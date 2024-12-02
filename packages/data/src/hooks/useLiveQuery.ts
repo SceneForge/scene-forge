@@ -1,7 +1,7 @@
 import { useLiveQuery as useDexieLiveQuery } from "dexie-react-hooks";
 import { useCallback } from "react";
 
-import type { Database } from "./database";
+import type { Database } from "../database";
 
 import { useDatabase } from "./useDatabase";
 

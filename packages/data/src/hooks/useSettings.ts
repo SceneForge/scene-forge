@@ -1,7 +1,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useCallback, useEffect, useState } from "react";
 
-import { type SettingsValue, SettingsValueSchema } from "./database";
+import { type SettingsValue, SettingsValueSchema } from "../database";
 import { useDatabase } from "./useDatabase";
 
 export type UseSettingsResult<T extends SettingsValue = SettingsValue> = [
